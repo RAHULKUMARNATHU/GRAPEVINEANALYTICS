@@ -13,7 +13,7 @@ export interface IData {
     "OD280/OD315 of diluted wines":number,
     "Unknown": number
 }
-export const data : IData[] = [
+export const InitialData : IData[] = [
   {
     "Alcohol": 1,
     "Malic Acid": 14.23,

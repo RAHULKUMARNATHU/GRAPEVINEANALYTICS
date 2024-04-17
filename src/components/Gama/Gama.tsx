@@ -1,31 +1,35 @@
-import { Table } from '@mantine/core';
+import {  Table, TableData } from '@mantine/core';
 import React from 'react';
-import { data } from '../../constants/data';
+import { calculateClassStats } from '../../utils/StatisticalAnalysisHelper';
+import {  InitialData  } from '../../constants/data';
+import { getClassStats } from '../../utils/FlavnoidsStats';
+import { getGamaStats } from '../../utils/GamaStats';
 
 const Gama: React.FC = () => {
 
-// const rows = data.map((element) => (
-//     <Table.Tr key={data.}>
-//       <Table.Td>{element.position}</Table.Td>
-//       <Table.Td>{element.name}</Table.Td>
-//       <Table.Td>{element.symbol}</Table.Td>
-//       <Table.Td>{element.mass}</Table.Td>
-//     </Table.Tr>
-//   ));
+const groupedData = calculateClassStats(InitialData);
 
-  return (
-    <Table>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th>Element position</Table.Th>
-          <Table.Th>Element name</Table.Th>
-          <Table.Th>Symbol</Table.Th>
-          <Table.Th>Atomic mass</Table.Th>
-        </Table.Tr>
-      </Table.Thead>
-      {/* <Table.Tbody>{rows}</Table.Tbody> */}
-    </Table>
-  );
+const classStats = getGamaStats(groupedData);
+const classHeaders = Array.from(classStats.keys()).map(key => `Class ${key}`);
+const means: number[] = [];
+const medians: number[] = [];
+const modes: number[] = [];
+
+for (const [, { mean, median, mode }] of classStats) {
+    means.push( mean);
+    medians.push(median);
+    modes.push(mode);
+}
+
+const tableData: TableData = {
+  caption: 'Gama statistics',
+  head:  ['Measure', ...classHeaders],
+  body: [['Gama mean' ,...means], ['Gama median', ...medians], ['Gama mode', ...modes]],
+};
+
+
+  return <Table data={tableData} />;
+  
 };
 
 export default Gama;
