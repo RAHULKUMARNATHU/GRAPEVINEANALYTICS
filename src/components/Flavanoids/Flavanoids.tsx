@@ -1,4 +1,4 @@
-import { MantineProvider, Table, TableData } from '@mantine/core';
+import { Table, TableData } from '@mantine/core';
 import React from 'react';
 import { calculateClassStats } from '../../utils/StatisticalAnalysisHelper';
 import {  InitialData  } from '../../constants/data';
@@ -26,7 +26,7 @@ const tableData: TableData = {
 };
 
 
-  return <Table data={tableData} />;
+  return <Table highlightOnHover striped data={tableData} />;
   
 };
 

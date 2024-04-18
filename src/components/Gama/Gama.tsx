@@ -2,7 +2,6 @@ import {  Table, TableData } from '@mantine/core';
 import React from 'react';
 import { calculateClassStats } from '../../utils/StatisticalAnalysisHelper';
 import {  InitialData  } from '../../constants/data';
-import { getClassStats } from '../../utils/FlavnoidsStats';
 import { getGamaStats } from '../../utils/GamaStats';
 
 const Gama: React.FC = () => {
@@ -28,7 +27,7 @@ const tableData: TableData = {
 };
 
 
-  return <Table data={tableData} />;
+return <Table highlightOnHover striped data={tableData} />;
   
 };
 
